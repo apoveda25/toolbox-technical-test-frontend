@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  spa:
+    container_name: toolbox_spa
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    working_dir: "/srv/toolbox"
+    volumes:
+      - "./:/srv/toolbox"
+    ports:
+      - "3000:3000"
+    networks:
+      - "toolbox-network"
+
+networks:
+  toolbox-network:
+    driver: bridge
+    name: toolbox
+    ipam:
+      driver: default
